@@ -305,6 +305,9 @@ MonoBehaviour:
   timeToSpawnMin: 3
   timeToSpawnMax: 5
   spikesPrefab: {fileID: 3148231050458871659, guid: 4e23b002a1c1c964c83bf2351c44d42a, type: 3}
+  parallaxScreens:
+  - {fileID: 1236279226}
+  - {fileID: 988915846}
 --- !u!1 &132008031
 GameObject:
   m_ObjectHideFlags: 0

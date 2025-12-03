@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
 
     private List<GameObject> obstacles = new List<GameObject>();
 
+    public List<GameObject> parallaxScreens = new List<GameObject>();
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -40,6 +42,15 @@ public class GameManager : MonoBehaviour
             {
                 obstacles.Add(Instantiate(spikesPrefab, new Vector3(13.0f + Random.Range(0.0f, 10.0f), -2.6f, 0.0f), Quaternion.identity));
                 timeToSpawnLeft = Random.Range(timeToSpawnMin, timeToSpawnMax);
+            }
+            for (int i = 0; i < parallaxScreens.Count; i++)
+            {
+                GameObject parallaxScreen = parallaxScreens[i];
+                float xOffset = speed * Time.deltaTime * Mathf.Pow(0.8f, (float)i);
+                parallaxScreen.transform.position = new Vector3(
+                    (parallaxScreen.transform.position.x - xOffset) % 16.0f,
+                    parallaxScreen.transform.position.y,
+                    parallaxScreen.transform.position.z);
             }
         }
     }
