@@ -4,7 +4,6 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    bool isRunning = false;
     Animator animator;
     Rigidbody2D rb;
     PlayerInput input;
@@ -22,7 +21,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        animator.SetFloat("xVelocity", isRunning ? 1.0f : 0.0f);
+        animator.SetFloat("xVelocity", GameManager.instance.active ? 1.0f : 0.0f);
         if (input.actions["Jump"].inProgress)
         {
             rb.gravityScale = 1.0f;
@@ -35,9 +34,9 @@ public class Player : MonoBehaviour
     
     void OnJump()
     {
-        if (!isRunning)
+        if (!GameManager.instance.active)
         {
-            isRunning = true;
+            GameManager.instance.active = true;
             canvasToHide.enabled = false;
         }
         else
@@ -55,5 +54,18 @@ public class Player : MonoBehaviour
                 Debug.Log("Bro, you're not even on the ground!");
             }
         }
+    }
+
+    public void Die()
+    {
+        GameManager.instance.Stop();
+        canvasToHide.enabled = true;
+        transform.rotation = Quaternion.Euler(Mathf.PI, 0.0f, 0.0f);
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log(other);
+        Die();
     }
 }
