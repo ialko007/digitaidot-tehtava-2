@@ -305,6 +305,7 @@ MonoBehaviour:
   timeToSpawnMin: 3
   timeToSpawnMax: 5
   spikesPrefab: {fileID: 3148231050458871659, guid: 4e23b002a1c1c964c83bf2351c44d42a, type: 3}
+  sawPrefab: {fileID: 4912721609022954300, guid: 02e1903a106183748b85137f20abd032, type: 3}
   parallaxScreens:
   - {fileID: 1236279226}
   - {fileID: 988915846}

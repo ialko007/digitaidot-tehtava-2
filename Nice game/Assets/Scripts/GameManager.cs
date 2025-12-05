@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     private float timeToSpawnLeft = 0.0f;
 
     [SerializeField] private GameObject spikesPrefab;
+    [SerializeField] private GameObject sawPrefab;
 
     private List<GameObject> obstacles = new List<GameObject>();
 
@@ -40,7 +41,19 @@ public class GameManager : MonoBehaviour
             timeToSpawnLeft -= Time.deltaTime * Mathf.Pow(2.0f, lifetime / doublingTime);
             if (timeToSpawnLeft <= 0.0f)
             {
-                obstacles.Add(Instantiate(spikesPrefab, new Vector3(13.0f + Random.Range(0.0f, 10.0f), -2.6f, 0.0f), Quaternion.identity));
+                int choice = Random.Range(0, 3);
+                switch (choice)
+                {
+                    case 0: // spikes
+                    case 1: // spikes
+                        obstacles.Add(Instantiate(spikesPrefab, new Vector3(13.0f + Random.Range(0.0f, 20.0f), -2.4f, 0.0f),
+                            Quaternion.identity));
+                        break;
+                    case 2: // saw
+                        obstacles.Add(Instantiate(sawPrefab, new Vector3(13.0f + Random.Range(0.0f, 20.0f), 1.75f, 0.0f),
+                            Quaternion.identity));
+                        break;
+                }
                 timeToSpawnLeft = Random.Range(timeToSpawnMin, timeToSpawnMax);
             }
             for (int i = 0; i < parallaxScreens.Count; i++)
@@ -68,6 +81,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(obstacle);
         }
+        obstacles.Clear();
         speed = startingSpeed;
         lifetime = 0.0f;
     }
